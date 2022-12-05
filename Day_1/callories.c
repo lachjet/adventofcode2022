@@ -15,9 +15,15 @@ int main(char** argv, int argc) {
 	int curCallories = 0;
 	int val = 0;
 	int i = 0;
+	bool end = false;
 
-	while ((rlen = getline(&buffer, &len, fptr)) != -1) {
-		val = atoi(buffer);
+	while (true) {
+		if ((rlen = getline(&buffer, &len, fptr)) != -1) {
+			val = atoi(buffer);
+		} else {
+			val = 0;
+			end = true;
+		}
 		if (val == 0) {
 			printf("Total callories for elf %d is %d\n", i, curCallories);
 			if (!(curCallories < max1) && (curCallories < max2)) {
@@ -38,6 +44,9 @@ int main(char** argv, int argc) {
 			i++;
 		} else {
 			curCallories += val;
+		}
+		if (end) {
+			break;
 		}
 		
 	}
